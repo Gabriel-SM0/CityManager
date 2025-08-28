@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import { StatusCodes } from "http-status-codes";
+import * as yup from "yup";
 
 
 interface ICity {
@@ -7,7 +9,33 @@ interface ICity {
     population: number;
 }
 
-export const createCityController = (req: Request<{},{},ICity>, res: Response) => {
+
+const bodyValidationSchema: yup.Schema<ICity> = yup.object().shape({
+    name: yup.string().required().min(3),
+    country: yup.string().required().min(3),
+    population: yup.number().required().min(10)
+})
+
+export const createCityController = async (req: Request<{},{},ICity>, res: Response) => {
+
+    let validateData: ICity | undefined = undefined;
+
+    try {
+        validateData = await bodyValidationSchema.validate(req.body, { abortEarly: false });
+    } catch (err) {
+        const yupError = err as yup.ValidationError;
+        const ValidationErrors: Record<string, string> = {};
+
+
+        yupError.inner.forEach(error => {
+            if (error.path === undefined) return;
+            ValidationErrors[error.path] = error.message;
+        });
+
+        return res.status(StatusCodes.BAD_REQUEST).json(
+            { errors: ValidationErrors
+            });
+    }
 
     const data = req.body;
 
