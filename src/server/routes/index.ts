@@ -15,7 +15,9 @@ router.post('/printMe', (req, res) => {
     // Logic to add a new city would go here
 } )
 
-router.post('/cities', citiesController.createCityController);
+router.post('/cities', citiesController.createValidation,
+     citiesController.createCity
+);
 
 
 export { router };

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import * as create from "./Create";
 
-create.createCityController
+create.createCity
 
 export const citiesController = {
     ...create
