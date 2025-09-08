@@ -10,20 +10,17 @@ interface ICity {
     population: number;
 }
 
-interface IFilter {
-    filter?: string;
-}
+
 
 export const createValidation = validation((getSchema) => ({
     body: getSchema<ICity>(yup.object().shape({
         name: yup.string().required().min(3).max(100),
         country: yup.string().required().min(3).max(100),
-        population: yup.number().required().min(1)
+        population: yup.number().required().min(1),
     })),
-    query: getSchema<IFilter>(yup.object().shape({
-        filter: yup.string().optional().min(3)
-    })),
+
 })); 
+
 
 export const createCity = async (req: Request<{},{},ICity>, res: Response) => {
 

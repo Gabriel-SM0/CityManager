@@ -6,8 +6,7 @@ type TProperty = "body" | "query" | "params" | "headers";
 
 type TAllSchemas = Record<TProperty, yup.ObjectSchema<any>>;
 
-
-type TGetSchema = <T>(schema: yup.ObjectSchema<any>) => yup.ObjectSchema<any>;
+type TGetSchema = <T extends yup.Maybe<yup.AnyObject>>(schema: yup.ObjectSchema<T>) => yup.ObjectSchema<any>;
 
 type TGetAllSchemas = (getSchema: TGetSchema) => Partial<TAllSchemas>;
 
