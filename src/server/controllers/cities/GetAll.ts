@@ -34,13 +34,3 @@ export const getAll = async (req: Request<{},{},{},IQueryProps>, res: Response) 
 
 }
 
-
-/*
-interface IFilter {
-    filter?: string;
-}
-    query: getSchema<IFilter>(yup.object().shape({
-        filter: yup.string().optional().min(3)
-    })),
-
-    */
