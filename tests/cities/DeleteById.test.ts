@@ -40,4 +40,3 @@ describe("deleteById Controller", () => {
     });
 });
 
-// We recommend installing an extension to run jest tests.

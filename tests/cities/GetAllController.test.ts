@@ -38,7 +38,6 @@ describe("getAll Controller", () => {
         const response = await request(app).get(`/cities?page=${page}&limit=${limit}&filter=${filter}`);
 
         expect(response.status).toBe(StatusCodes.OK);
-        // AJUSTE: Agora esperamos NÚMEROS, pois o middleware corrigiu os tipos.
         expect(response.body).toEqual({
             message: "Get All Cities",
             query: {

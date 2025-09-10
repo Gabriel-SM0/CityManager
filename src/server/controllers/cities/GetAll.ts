@@ -25,6 +25,8 @@ export const getAllValidation = validation((getSchema) => ({
 
 
 export const getAll = async (req: Request<{},{},{},IQueryProps>, res: Response) => {
+    res.setHeader("access-control-expose-headers", "X-Total-Count");
+    res.setHeader("X-Total-Count", "100");
     console.log(req.query);
 
     console.log("Get All Cities Controller");
