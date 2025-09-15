@@ -4,4 +4,4 @@ dist/
 coverage
 .vscode
 package-lock.json
-.sqlit
+*.sqlite
