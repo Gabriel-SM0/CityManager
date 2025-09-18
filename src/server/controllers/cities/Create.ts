@@ -3,9 +3,10 @@ import { StatusCodes } from "http-status-codes";
 import * as yup from "yup";
 import { validation } from "../../shared/middleware";
 import { ICity } from "../../database/models";
+import { citiesProvider } from "../../database/providers/cities";
 
 
-interface IBodyProps  extends Omit<ICity,'id'>{}
+interface IBodyProps extends Omit<ICity,'id'>{}
 
 
 
@@ -20,6 +21,16 @@ export const createValidation = validation((getSchema) => ({
 
 
 export const createCity = async (req: Request<{},{},ICity>, res: Response) => {
+
+    const result = await citiesProvider.create(req.body);
+    
+    if (result instanceof Error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            error: {
+                default: result.message
+            }
+        });
+    }
 
     const data = req.body;
     console.log(`Creating city with data: ${data.name}`);
