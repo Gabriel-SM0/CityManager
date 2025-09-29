@@ -16,10 +16,7 @@ export const count = async (filter = '') : Promise<number | Error> => {
 
         return new Error(`Error trying to count with filter ${filter}`)
         
-
-
-
-        
+       
     } catch (error) {
         console.log(error)
         throw new Error('Error trying get one element with a get');

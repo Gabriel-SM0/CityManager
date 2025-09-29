@@ -30,7 +30,7 @@ export const createCity = async (req: Request<{},{},ICity>, res: Response) => {
                 default: result.message
             }
         });
-    }
+    } 
 
     const data = req.body;
     console.log(`Creating city with name: ${data.name}`);

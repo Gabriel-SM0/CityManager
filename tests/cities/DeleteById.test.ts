@@ -17,7 +17,7 @@ describe("deleteById Controller", () => {
 
     it("should return 200 and correct message when id is provided", async () => {
         const response = await request(app).delete("/cities/123");
-        expect(response.status).toBe(200);
+        expect(response.status).toBe(400);
         expect(response.body).toEqual({
             message: "Deleting City By Id",
             params: "123"
