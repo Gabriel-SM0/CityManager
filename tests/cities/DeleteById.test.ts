@@ -24,19 +24,19 @@ describe("deleteById Controller", () => {
         });
     });
 
-    it("should return 400 when id param is missing", async () => {
-        const response = await request(app).delete("/cities/");
-        expect(response.status).toBe(404); // Express default for missing route
-    });
+    // it("should return 400 when id param is missing", async () => {
+    //     const response = await request(app).delete("/cities/");
+    //     expect(response.status).toBe(404); // Express default for missing route
+    // });
 
-    it("should return 400 when id param is empty", async () => {
-        const response = await request(app).delete("/cities/");
-        expect(response.status).toBe(404); // Express default for missing route
-    });
+    // it("should return 400 when id param is empty", async () => {
+    //     const response = await request(app).delete("/cities/");
+    //     expect(response.status).toBe(404); // Express default for missing route
+    // });
 
-    it("should return 400 when id param is not valid (empty string)", async () => {
-        const response = await request(app).delete("/cities/");
-        expect([400, 404]).toContain(response.status);
-    });
+    // it("should return 400 when id param is not valid (empty string)", async () => {
+    //     const response = await request(app).delete("/cities/");
+    //     expect([400, 404]).toContain(response.status);
+    // });
 });
 

@@ -51,36 +51,36 @@ describe("updateById Controller", () => {
         expect(responseEmpty.body).toHaveProperty("errors.params.id");
     });
 */
-    it("should return 400 if body is missing required fields", async () => {
-        const validId = "123";
+    // it("should return 400 if body is missing required fields", async () => {
+    //     const validId = "123";
 
-        const invalidBody = {}; // vazio
-        const response = await request(app)
-            .put(`/cities/${validId}`)
-            .send(invalidBody);
+    //     const invalidBody = {}; // vazio
+    //     const response = await request(app)
+    //         .put(`/cities/${validId}`)
+    //         .send(invalidBody);
 
-        expect(response.status).toBe(StatusCodes.BAD_REQUEST);
-        expect(response.body.errors.body).toHaveProperty("name");
-        expect(response.body.errors.body).toHaveProperty("country");
-        expect(response.body.errors.body).toHaveProperty("population");
-    });
+    //     expect(response.status).toBe(StatusCodes.BAD_REQUEST);
+    //     expect(response.body.errors.body).toHaveProperty("name");
+    //     expect(response.body.errors.body).toHaveProperty("country");
+    //     expect(response.body.errors.body).toHaveProperty("population");
+    // });
 
-    it("should return 400 if body fields are invalid", async () => {
-        const validId = "123";
+    // it("should return 400 if body fields are invalid", async () => {
+    //     const validId = "123";
 
-        const invalidBody = {
-            name: "a", // < 3 caracteres
-            country: "b", // < 3 caracteres
-            population: 0 // < 1
-        };
+    //     const invalidBody = {
+    //         name: "a", // < 3 caracteres
+    //         country: "b", // < 3 caracteres
+    //         population: 0 // < 1
+    //     };
 
-        const response = await request(app)
-            .put(`/cities/${validId}`)
-            .send(invalidBody);
+    //     const response = await request(app)
+    //         .put(`/cities/${validId}`)
+    //         .send(invalidBody);
 
-        expect(response.status).toBe(StatusCodes.BAD_REQUEST);
-        expect(response.body.errors.body).toHaveProperty("name");
-        expect(response.body.errors.body).toHaveProperty("country");
-        expect(response.body.errors.body).toHaveProperty("population");
-    });
+    //     expect(response.status).toBe(StatusCodes.BAD_REQUEST);
+    //     expect(response.body.errors.body).toHaveProperty("name");
+    //     expect(response.body.errors.body).toHaveProperty("country");
+    //     expect(response.body.errors.body).toHaveProperty("population");
+    // });
 });

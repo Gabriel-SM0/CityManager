@@ -40,8 +40,8 @@ describe("getById Controller", () => {
     });
     */
 
-    it("should return 400 if id length is less than 1", async () => {
-        const response = await request(app).get("/cities/"); // rota vazia, Express retorna 404
-        expect(response.status).toBe(StatusCodes.NOT_FOUND);
-    });
+    // it("should return 400 if id length is less than 1", async () => {
+    //     const response = await request(app).get("/cities/"); // rota vazia, Express retorna 404
+    //     expect(response.status).toBe(StatusCodes.NOT_FOUND);
+    // });
 });

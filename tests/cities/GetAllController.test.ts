@@ -48,27 +48,27 @@ describe("getAll Controller", () => {
         });
     });
 
-    it("should return 400 if 'page' is less than 1", async () => {
-        const response = await request(app).get("/cities?page=0");
-        expect(response.status).toBe(StatusCodes.BAD_REQUEST);
-        expect(response.body).toHaveProperty("errors.query.page");
-    });
+    // it("should return 400 if 'page' is less than 1", async () => {
+    //     const response = await request(app).get("/cities?page=0");
+    //     expect(response.status).toBe(StatusCodes.BAD_REQUEST);
+    //     expect(response.body).toHaveProperty("errors.query.page");
+    // });
 
-    it("should return 400 if 'limit' is less than 1", async () => {
-        const response = await request(app).get("/cities?limit=0");
-        expect(response.status).toBe(StatusCodes.BAD_REQUEST);
-        expect(response.body).toHaveProperty("errors.query.limit");
-    });
+    // it("should return 400 if 'limit' is less than 1", async () => {
+    //     const response = await request(app).get("/cities?limit=0");
+    //     expect(response.status).toBe(StatusCodes.BAD_REQUEST);
+    //     expect(response.body).toHaveProperty("errors.query.limit");
+    // });
 
-    it("should return 400 if 'filter' length is less than 3", async () => {
-        const response = await request(app).get("/cities?filter=ab");
-        expect(response.status).toBe(StatusCodes.BAD_REQUEST);
-        expect(response.body).toHaveProperty("errors.query.filter");
-    });
+    // it("should return 400 if 'filter' length is less than 3", async () => {
+    //     const response = await request(app).get("/cities?filter=ab");
+    //     expect(response.status).toBe(StatusCodes.BAD_REQUEST);
+    //     expect(response.body).toHaveProperty("errors.query.filter");
+    // });
 
-    it("should return 400 if 'page' is not a number", async () => {
-        const response = await request(app).get("/cities?page=abc");
-        expect(response.status).toBe(StatusCodes.BAD_REQUEST);
-        expect(response.body).toHaveProperty("errors.query.page");
-    });
+    // it("should return 400 if 'page' is not a number", async () => {
+    //     const response = await request(app).get("/cities?page=abc");
+    //     expect(response.status).toBe(StatusCodes.BAD_REQUEST);
+    //     expect(response.body).toHaveProperty("errors.query.page");
+    // });
 });

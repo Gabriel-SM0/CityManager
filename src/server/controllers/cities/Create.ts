@@ -36,6 +36,5 @@ export const createCity = async (req: Request<{},{},ICity>, res: Response) => {
     console.log(`Creating city with name: ${data.name}`);
     return res.status(StatusCodes.CREATED).json({ id: result });
 
-    // Logic to create a new city would go here 
 }
 
