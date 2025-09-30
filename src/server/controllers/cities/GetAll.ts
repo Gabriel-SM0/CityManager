@@ -49,9 +49,6 @@ export const getAll = async (req: Request<{},{},{},IQueryProps>, res: Response) 
         })
     }
 
-
-
-
     res.setHeader("access-control-expose-headers", "X-Total-Count");
     res.setHeader("X-Total-Count", count);
     console.log(req.query);
