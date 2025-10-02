@@ -1,1 +1,2 @@
-export * from './city'
+export * from './City'
+export * from './Person'

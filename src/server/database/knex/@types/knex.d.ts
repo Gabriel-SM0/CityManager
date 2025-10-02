@@ -1,12 +1,9 @@
-import { ICity } from "../../models";
+import { ICity, IPerson } from "../../models";
 
 declare module 'knex/types/tables' {
     interface tables {
     cities: ICity
-        id:number;
-        name: string;
-        country: string;
-        population: number;
+    preson: IPerson
 }
 
 
