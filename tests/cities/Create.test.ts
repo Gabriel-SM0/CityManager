@@ -3,6 +3,7 @@ import { testServer } from '../jest.setup';
 
 describe('Create City', () => {
     let cityName: string = "Test City";
+    
     it('should create a city successfully', async () => {
         const response = await testServer.post('/cities').send({
             name: cityName,
