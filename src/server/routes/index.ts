@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { StatusCodes } from 'http-status-codes';
-import { citiesController } from "../controllers";
+import { citiesController, personController } from "../controllers";
 
 const router = Router();
 
@@ -20,5 +20,12 @@ router.get('/cities', citiesController.getAllValidation,citiesController.getAll)
 router.get('/cities/:id', citiesController.getByIdValidation,citiesController.getById);
 router.put('/cities/:id', citiesController.updateByIdValidation,citiesController.updateById);
 router.delete('/cities/:id', citiesController.deleteByIdValidation,citiesController.deleteById)
+
+router.post('/person',personController.createValidation, personController.createPerson)
+router.get('/person/:id', personController.getByIdValidation,personController.getById);
+router.get('/person', personController.getAllValidation,personController.getAll);
+router.put('/person/:id', personController.updateByIdValidation,personController.updateById);
+router.delete('/person/:id', personController.deleteByIdValidation,personController.deleteById)
+
 
 export { router };
