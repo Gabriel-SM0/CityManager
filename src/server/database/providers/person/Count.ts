@@ -5,7 +5,7 @@ import { Knex } from "../../index";
 export const count = async (filter = '') : Promise<number | Error> => {
 
     try { 
-        console.log(`Trying to cout all element with filer:${filter} from the database`)
+        console.log(`Trying to cout all element with filter: ${filter ?? 'none'} from the database`)
 
         const [{ count }] = await Knex(ETableNames.person)
         .where('fullName', 'like', `%${filter}%`)

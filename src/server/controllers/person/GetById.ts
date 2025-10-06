@@ -18,14 +18,14 @@ export const getByIdValidation = validation((getSchema) => ({
 
     })),
 
-})); 
+}));
 
 
 
 export const getById = async (req: Request<IParamsProps>, res: Response) => {
     console.log(req.params);
-    console.log("Get person By Id Controller");
-    console.log({params: req.params});
+    console.log("Getting a person By Id Controller");
+    console.log({ params: `${JSON.stringify(req.params)}` });
 
     if (!req.params.id) {
         return res.status(StatusCodes.BAD_REQUEST).json({
@@ -38,11 +38,22 @@ export const getById = async (req: Request<IParamsProps>, res: Response) => {
     const result = await personProvider.getById(req.params.id);
 
     if (result instanceof Error) {
-        return res.status(StatusCodes.BAD_GATEWAY).json({
-            errors: {
-                default: result.message
-            }
-        })
+
+        if (result.message.includes('not found')) {
+            return res.status(StatusCodes.NOT_FOUND).json({
+                errors: {
+                    default: result.message
+                }
+            })
+        } else {
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                errors: {
+                    default: result.message
+                }
+            })
+
+        }
+
     }
 
 

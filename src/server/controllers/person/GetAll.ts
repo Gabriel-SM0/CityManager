@@ -23,26 +23,37 @@ export const getAllValidation = validation((getSchema) => ({
         filter: yup.string().optional().min(3)
     })),
 
-})); 
+}));
 
 
 
-export const getAll = async (req: Request<{},{},{},IQueryProps>, res: Response) => {
+export const getAll = async (req: Request<{}, {}, {}, IQueryProps>, res: Response) => {
+
+    console.log("Get All Person Controller");
+    const page = req.query.page;
+    const limit = req.query.limit;
+    const filter = req.query.filter ?? '';
+
+    console.log({
+        page,
+        limit,
+        filter
+    });
 
 
     const result = await personProvider.getAll(req.query.page || 1, req.query.limit || 7, req.query.filter || '')
     const count = await personProvider.count(req.query.filter || '')
 
 
-    if (result instanceof Error){
+    if (result instanceof Error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-            errors:{
+            errors: {
                 default: result.message
             }
         })
     } else if (count instanceof Error) {
-                return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-            errors:{
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            errors: {
                 default: count.message
             }
 
@@ -51,10 +62,6 @@ export const getAll = async (req: Request<{},{},{},IQueryProps>, res: Response) 
 
     res.setHeader("access-control-expose-headers", "X-Total-Count");
     res.setHeader("X-Total-Count", count);
-    console.log(req.query);
-
-    console.log("Get All person Controller");
-    console.log({query: req.query});
 
     return res.status(StatusCodes.OK).json(result);
 

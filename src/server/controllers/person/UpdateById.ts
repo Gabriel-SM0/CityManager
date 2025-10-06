@@ -11,7 +11,7 @@ interface IParamsProps {
     id?: number;
 }
 
-interface IBodyProps extends Omit<IPerson, 'id'>{
+interface IBodyProps extends Omit<IPerson, 'id'> {
     email: string;
     fullName: string;
     cityId: number;
@@ -29,36 +29,44 @@ export const updateByIdValidation = validation((getSchema) => ({
         fullName: yup.string().required().min(1),
     })),
 
-})); 
+}));
 
 
 
 export const updateById = async (req: Request<IParamsProps>, res: Response) => {
 
-    console.log(req.params.id);
+    console.log(`Trying to edit on person with id: ${req.params.id}`);
     console.log(req.body);
-    console.log("Update person By Id Controller");
-    console.log({params: req.params, body: req.body});
+    console.log({ params: req.params.id, body: req.body });
 
 
     if (!req.params.id) {
         return res.status(StatusCodes.BAD_REQUEST).json({
-            erros: {
+            errors: {
                 default: "ID need to be informed"
             }
         })
     }
 
-    const result = await personProvider.updateById(req.params.id,req.body);
-    
+    const result = await personProvider.updateById(req.params.id, req.body);
+
     if (result instanceof Error) {
-        return res.status(StatusCodes.BAD_GATEWAY).json({
-            errors: result.message
-        })
+
+        if (result.message?.includes('No person')) {
+            return res.status(StatusCodes.NOT_FOUND).json({
+                error: result.message
+            })
+        } else {
+
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                error: result.message
+            })
+        }
+
     }
 
-    return res.status(StatusCodes.NO_CONTENT).json({ message: "Update person By Id", params: req.params.id, body: req.body });
-    
+    return res.sendStatus(StatusCodes.NO_CONTENT);
+
 }
 
 
