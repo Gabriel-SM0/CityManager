@@ -14,7 +14,7 @@ interface IParamsProps {
 
 export const getByIdValidation = validation((getSchema) => ({
     params: getSchema<IParamsProps>(yup.object().shape({
-        id: yup.number().min(1).required(),
+        id: yup.number().integer().min(1).required(),
 
     })),
 

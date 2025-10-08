@@ -34,11 +34,9 @@ export const updateByIdValidation = validation((getSchema) => ({
 
 
 export const updateById = async (req: Request<IParamsProps>, res: Response) => {
-
     console.log(`Trying to edit on person with id: ${req.params.id}`);
     console.log(req.body);
     console.log({ params: req.params.id, body: req.body });
-
 
     if (!req.params.id) {
         return res.status(StatusCodes.BAD_REQUEST).json({
@@ -47,11 +45,10 @@ export const updateById = async (req: Request<IParamsProps>, res: Response) => {
             }
         })
     }
-
+ 
     const result = await personProvider.updateById(req.params.id, req.body);
 
     if (result instanceof Error) {
-
         if (result.message?.includes('No person')) {
             return res.status(StatusCodes.NOT_FOUND).json({
                 error: result.message
@@ -62,7 +59,6 @@ export const updateById = async (req: Request<IParamsProps>, res: Response) => {
                 error: result.message
             })
         }
-
     }
 
     return res.sendStatus(StatusCodes.NO_CONTENT);

@@ -14,7 +14,7 @@ interface IParamsProps {
 
 export const deleteByIdValidation = validation((getSchema) => ({
     params: getSchema<IParamsProps>(yup.object().shape({
-        id: yup.number().min(1).required(),
+        id: yup.number().min(1).integer().required(),
 
     })),
 })); 
@@ -34,7 +34,6 @@ export const deleteById = async (req: Request<IParamsProps>, res: Response) => {
                 default: "ID need to be informed"
             }
         })
-
     }
 
     const result = await personProvider.deleteById(req.params.id);

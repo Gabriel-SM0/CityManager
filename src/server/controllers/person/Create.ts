@@ -15,12 +15,10 @@ export const createValidation = validation((getSchema) => ({
         cityId: yup.number().required().min(1).max(100),
         fullName: yup.string().required().min(1),
     })),
-
 })); 
 
 
 export const createPerson = async (req: Request<{},{},IPerson>, res: Response) => {
-
     const result = await personProvider.create(req.body);
 
     if (result instanceof Error) {
@@ -34,6 +32,5 @@ export const createPerson = async (req: Request<{},{},IPerson>, res: Response) =
     return res.status(StatusCodes.CREATED).json({
         id: result
     })
-
 }
 

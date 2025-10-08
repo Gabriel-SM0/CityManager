@@ -6,25 +6,19 @@ import { personProvider } from "../../database/providers/person";
 
 
 interface IQueryProps {
-    id?: number;
     page?: number;
     limit?: number;
     filter?: string;
-
 }
-
 
 
 export const getAllValidation = validation((getSchema) => ({
     query: getSchema<IQueryProps>(yup.object().shape({
-        id: yup.number().optional().min(1).moreThan(0),
         page: yup.number().optional().min(1).default(1).moreThan(0),
         limit: yup.number().optional().min(1).default(10).moreThan(0),
         filter: yup.string().optional().min(3)
     })),
-
 }));
-
 
 
 export const getAll = async (req: Request<{}, {}, {}, IQueryProps>, res: Response) => {
@@ -56,7 +50,6 @@ export const getAll = async (req: Request<{}, {}, {}, IQueryProps>, res: Respons
             errors: {
                 default: count.message
             }
-
         })
     }
 
@@ -64,7 +57,5 @@ export const getAll = async (req: Request<{}, {}, {}, IQueryProps>, res: Respons
     res.setHeader("X-Total-Count", count);
 
     return res.status(StatusCodes.OK).json(result);
-
-
 }
 

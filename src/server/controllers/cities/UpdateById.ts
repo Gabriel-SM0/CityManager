@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import * as yup from "yup";
 import { validation } from "../../shared/middleware";
 import { ICity } from "../../database/models";
-import { citiesController } from ".";
+import { CitiesController } from ".";
 import { citiesProvider } from "../../database/providers/cities";
 
 
