@@ -1,11 +1,11 @@
 import { ICity } from "../../models";
 import { ETableNames } from "../../ETableNames";
-import { Knex } from "../../index";
+import { KnexConection } from "../../index";
 
 export const deleteById = async (id: number): Promise<void | Error> => {
 
     try { 
-        const result = await Knex(ETableNames.city)
+        const result = await KnexConection(ETableNames.city)
         .where('id', '=', id)
         .del();
 

@@ -1,6 +1,6 @@
 import { ICity } from "../../models";
 import { ETableNames } from "../../ETableNames";
-import { Knex } from "../../index";
+import { KnexConection } from "../../index";
 
 export const getById = async (id:number) : Promise<ICity | Error> => {
 
@@ -8,7 +8,7 @@ export const getById = async (id:number) : Promise<ICity | Error> => {
         
         console.log(`Trying to get an element with ${id} from the database`)
 
-        const result = await Knex(ETableNames.city)
+        const result = await KnexConection(ETableNames.city)
         .select('*')
         .where('id', '=', id)
         .first();

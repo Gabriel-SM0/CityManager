@@ -1,11 +1,11 @@
 import { IPerson } from "../../models";
 import { ETableNames } from "../../ETableNames";
-import { Knex } from "../../index";
+import { KnexConection } from "../../index";
 
 export const updateById = async (id: number, person: Omit<IPerson, 'id'>): Promise<void | Error> => {
 
     try {
-        const [{ count }] = await Knex(ETableNames.city)
+        const [{ count }] = await KnexConection(ETableNames.city)
             .where('id', '=', person.cityId)
             .count<[{ count: number }]>('* as count');
 
@@ -14,7 +14,7 @@ export const updateById = async (id: number, person: Omit<IPerson, 'id'>): Promi
         }
 
         console.log(`Trying to update the person with the id: ${id}.`)
-        const result = await Knex(ETableNames.person)
+        const result = await KnexConection(ETableNames.person)
             .update(person)
             .where('id', '=', id);
 

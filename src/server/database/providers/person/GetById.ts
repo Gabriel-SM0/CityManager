@@ -1,6 +1,6 @@
 import { IPerson } from "../../models";
 import { ETableNames } from "../../ETableNames";
-import { Knex } from "../../index";
+import { KnexConection } from "../../index";
 
 
 export const getById = async (id: number): Promise<IPerson | Error> => {
@@ -8,7 +8,7 @@ export const getById = async (id: number): Promise<IPerson | Error> => {
 
         console.log(`Trying to get an element with ${id} from the database`)
 
-        const result = await Knex(ETableNames.person)
+        const result = await KnexConection(ETableNames.person)
             .select('*')
             .where('id', '=', id)
             .first();

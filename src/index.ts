@@ -1,4 +1,4 @@
-import { Knex } from './server/database';
+import { KnexConection } from './server/database';
 import { production } from './server/database/knex/Enviroment';
 import { server } from './server/ServerFile';
 
@@ -12,9 +12,9 @@ const startServer = () => {
 
 
 if(process.env.IS_LOCALHOST !== 'true') {
-    Knex.migrate.latest().then(() => {
+    KnexConection.migrate.latest().then(() => {
 
-        Knex.seed.run().then(() => {
+        KnexConection.seed.run().then(() => {
         startServer();
         }).catch(console.log);
     }).catch(console.log)

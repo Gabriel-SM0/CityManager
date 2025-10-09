@@ -1,12 +1,12 @@
 import { IPerson } from "../../models";
 import { ETableNames } from "../../ETableNames";
-import { Knex } from "../../index";
+import { KnexConection } from "../../index";
 
 export const create = async (person: Omit<IPerson, 'id'>): Promise<number | Error> => {
 
     try {
 
-        const [{ count }] = await Knex(ETableNames.city)
+        const [{ count }] = await KnexConection(ETableNames.city)
             .where('id', '=', person.cityId)
             .count<[{ count: number }]>('* as count');
 
@@ -15,7 +15,7 @@ export const create = async (person: Omit<IPerson, 'id'>): Promise<number | Erro
             return new Error("The city assocated with this register were not found")
         }
 
-        const [result] = await Knex(ETableNames.person).insert(person).returning('id');
+        const [result] = await KnexConection(ETableNames.person).insert(person).returning('id');
 
         console.log(`${JSON.stringify(result)} inserted on the database`)
 

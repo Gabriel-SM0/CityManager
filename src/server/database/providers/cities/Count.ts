@@ -1,6 +1,6 @@
 import { ICity } from "../../models";
 import { ETableNames } from "../../ETableNames";
-import { Knex } from "../../index";
+import { KnexConection } from "../../index";
 
 export const count = async (filter = '') : Promise<number | Error> => {
 
@@ -8,7 +8,7 @@ export const count = async (filter = '') : Promise<number | Error> => {
         
         console.log(`Trying to cout all element with filer:${filter} from the database`)
 
-        const [{ count }] = await Knex(ETableNames.city)
+        const [{ count }] = await KnexConection(ETableNames.city)
         .where('name', 'like', `%${filter}%`)
         .count<[{ count: number }]>('* as count');
 

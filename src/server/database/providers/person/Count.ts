@@ -1,12 +1,12 @@
 import { ETableNames } from "../../ETableNames";
-import { Knex } from "../../index";
+import { KnexConection } from "../../index";
 
 export const count = async (filter = '') : Promise<number | Error> => {
 
     try { 
         console.log(`Trying to cout all element with filter: ${filter ?? '(no filter sent)'} from the database`)
 
-        const [{ count }] = await Knex(ETableNames.person)
+        const [{ count }] = await KnexConection(ETableNames.person)
         .where('fullName', 'like', `%${filter}%`)
         .count<[{ count: number }]>('* as count');
 
