@@ -28,12 +28,12 @@ const createFunctionTest = async (user: Omit<IUser, 'id'>): Promise<number | Err
     try {
         const [result] = await KnexConection(ETableNames.user).insert(user).returning('id');
         /*
+
         [
         { id: 42},
         {id: 55}
         ]
-
-
+        
         */
 
         if (typeof result === 'object') {

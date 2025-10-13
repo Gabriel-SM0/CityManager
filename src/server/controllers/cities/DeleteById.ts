@@ -2,7 +2,7 @@ import { Request, RequestHandler, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import * as yup from "yup";
 import { validation } from "../../shared/middleware";
-import { CitiesController } from ".";
+import { citiesController } from ".";
 import { citiesProvider } from "../../database/providers/cities";
 
 

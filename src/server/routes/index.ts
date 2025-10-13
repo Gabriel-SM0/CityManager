@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { StatusCodes } from 'http-status-codes';
-import { CitiesController, PersonController } from "../controllers";
+import { citiesController, personController, userController } from "../controllers";
 
 const router = Router();
 
@@ -15,17 +15,20 @@ router.post('/printMe', (req, res) => {
     // Logic to add a new city would go here
 } )
 
-router.post('/cities', CitiesController.createValidation,CitiesController.createCity);
-router.get('/cities', CitiesController.getAllValidation,CitiesController.getAll);
-router.get('/cities/:id', CitiesController.getByIdValidation,CitiesController.getById);
-router.put('/cities/:id', CitiesController.updateByIdValidation,CitiesController.updateById);
-router.delete('/cities/:id', CitiesController.deleteByIdValidation,CitiesController.deleteById)
+router.post('/cities', citiesController.createValidation,citiesController.createCity);
+router.get('/cities', citiesController.getAllValidation,citiesController.getAll);
+router.get('/cities/:id', citiesController.getByIdValidation,citiesController.getById);
+router.put('/cities/:id', citiesController.updateByIdValidation,citiesController.updateById);
+router.delete('/cities/:id', citiesController.deleteByIdValidation,citiesController.deleteById)
 
-router.post('/person',PersonController.createValidation, PersonController.createPerson)
-router.get('/person/:id', PersonController.getByIdValidation,PersonController.getById);
-router.get('/person', PersonController.getAllValidation,PersonController.getAll);
-router.put('/person/:id', PersonController.updateByIdValidation,PersonController.updateById);
-router.delete('/person/:id', PersonController.deleteByIdValidation,PersonController.deleteById)
+router.post('/person',personController.createValidation, personController.createPerson)
+router.get('/person/:id', personController.getByIdValidation,personController.getById);
+router.get('/person', personController.getAllValidation,personController.getAll);
+router.put('/person/:id', personController.updateByIdValidation,personController.updateById);
+router.delete('/person/:id', personController.deleteByIdValidation,personController.deleteById)
+
+router.post('/user', userController.signUpValidation, userController.signUp);
+router.get('/user', userController.signValidation, userController.signUser);
 
 
 export { router };
