@@ -23,12 +23,20 @@ export const signUser = async (req: Request<{},{},IBodyProps>, res: Response) =>
 
     if (result instanceof Error) {
         return res.status(StatusCodes.UNAUTHORIZED).json({
-            error: result.message
+            error: "Invalid email or password"
             
         })
     }
 
-    return res.status(StatusCodes.ACCEPTED).json({token:"acessToken"})
+    if (result.password !== req.body.password) {
+        return res.status(StatusCodes.UNAUTHORIZED).json({
+            error: "Invalid Email or password"
+        })
+    }else {
+        return res.status(StatusCodes.OK).json({token:"acessToken"}).send()
+
+    }
+
 
 
 }
