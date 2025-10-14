@@ -4,6 +4,7 @@ import * as yup from "yup";
 import { validation } from "../../shared/middleware";
 import { IUser } from "../../database/models";
 import { getByEmail } from "../../database/providers/user/GetByEmail";
+import { verifyPassword } from "../../shared/services";
 
 
 interface IBodyProps extends Omit<IUser,'id' | 'name'>{}
@@ -27,8 +28,10 @@ export const signUser = async (req: Request<{},{},IBodyProps>, res: Response) =>
             
         })
     }
+    
+    const passwordStatus = await verifyPassword(req.body.password,result.password);
 
-    if (result.password !== req.body.password) {
+    if (!passwordStatus) {
         return res.status(StatusCodes.UNAUTHORIZED).json({
             error: "Invalid Email or password"
         })
@@ -40,20 +43,4 @@ export const signUser = async (req: Request<{},{},IBodyProps>, res: Response) =>
 
 
 }
-
-// export const signPerson = async (req: Request<{},{},IPerson>, res: Response) => {
-//     const result = await personProvider.create(req.body);
-
-//     if (result instanceof Error) {
-//         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-//             error: {
-//                 default: result.message
-//             }
-//         })
-//     }
-
-//     return res.status(StatusCodes.CREATED).json({
-//         id: result
-//     })
-// }
 

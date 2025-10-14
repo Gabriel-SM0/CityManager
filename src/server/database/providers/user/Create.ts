@@ -1,12 +1,19 @@
 
-import { IPerson, IUser } from "../../models";
+import { IUser } from "../../models";
 import { ETableNames } from "../../ETableNames";
 import { KnexConection } from "../../index";
+import {PasswordCrypto} from "./../../../shared/services/PasswordCrypto"
 
 
 export const create = async (user: Omit<IUser, 'id'>): Promise<number | Error> => {
     try {
-        const [result] = await KnexConection(ETableNames.user).insert(user).returning('id');
+
+        const hashedPassword = await PasswordCrypto.hashPassword(user.password);
+
+        user.password = hashedPassword;
+        //same way as did bellow, but i will stay with this above code just to have two different ways to do
+
+        const [result] = await KnexConection(ETableNames.user).insert({...user, password: hashedPassword}).returning('id');
 
         console.log(`${JSON.stringify(result)} inserted on the database`)
 
