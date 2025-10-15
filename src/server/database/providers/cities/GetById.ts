@@ -1,30 +1,34 @@
 import { ICity } from "../../models";
 import { ETableNames } from "../../ETableNames";
-import { Knex } from "../../index";
+import { KnexConection } from "../../index";
 
-export const getById = async (id:number) : Promise<ICity | Error> => {
+export const getById = async (id: number): Promise<ICity | Error> => {
 
-    try { 
-        
+    try {
+
         console.log(`Trying to get an element with ${id} from the database`)
 
-        const result = await Knex(ETableNames.city)
-        .select('*')
-        .where('id', '=', id)
-        .first();
+        const result = await KnexConection(ETableNames.city)
+            .select('*')
+            .where('id', '=', id)
+            .first();
 
 
-        return result;
+        if (result) {
+            return result;
+        } else {
+            return new Error('Error trying get one element with a get');
+        }
 
 
-        
+
     } catch (error) {
         console.log(error)
         throw new Error('Error trying get one element with a get');
 
-        
-    } 
 
-  
+    }
+
+
 
 }

@@ -1,11 +1,11 @@
 import { ICity } from "../../models";
 import { ETableNames } from "../../ETableNames";
-import { Knex } from "../../index";
+import { KnexConection } from "../../index";
 
 export const getAll = async (page: number, limit: number, filter: string, id = 0): Promise<ICity[] | Error> => {
 
     try { 
-        const result = await Knex(ETableNames.city)
+        const result = await KnexConection(ETableNames.city)
         .select('*')
         .where('id', Number(id))
         .orWhere('name', 'like', `%${filter}%`)
@@ -15,7 +15,7 @@ export const getAll = async (page: number, limit: number, filter: string, id = 0
 
 
         if (id>0 && result.every(item => item.id !== id)) {
-            const resultById = await Knex(ETableNames.city)
+            const resultById = await KnexConection(ETableNames.city)
             .select('*')
             .where('id', '=', id)
             .first();

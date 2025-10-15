@@ -14,6 +14,4 @@ const getEnviroment = () => {
 }
 
 
-
-
-export const Knex = knex(getEnviroment());
+export const KnexConection = knex(getEnviroment());

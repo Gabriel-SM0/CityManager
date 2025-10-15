@@ -1,21 +1,18 @@
-import { ICity } from "../../models";
 import { ETableNames } from "../../ETableNames";
 import { KnexConection } from "../../index";
 
 export const count = async (filter = '') : Promise<number | Error> => {
 
     try { 
-        
-        console.log(`Trying to cout all element with filer:${filter} from the database`)
+        console.log(`Trying to cout all element with filter: ${filter ?? '(no filter sent)'} from the database`)
 
-        const [{ count }] = await KnexConection(ETableNames.city)
-        .where('name', 'like', `%${filter}%`)
+        const [{ count }] = await KnexConection(ETableNames.person)
+        .where('fullName', 'like', `%${filter}%`)
         .count<[{ count: number }]>('* as count');
 
         if (Number.isInteger(Number(count))) return Number(count);
 
         return new Error(`Error trying to count with filter ${filter}`)
-        
        
     } catch (error) {
         console.log(error)
@@ -25,5 +22,4 @@ export const count = async (filter = '') : Promise<number | Error> => {
     } 
 
   
-
 }

@@ -9,7 +9,6 @@ import { citiesProvider } from "../../database/providers/cities";
 interface IBodyProps extends Omit<ICity,'id'>{}
 
 
-
 export const createValidation = validation((getSchema) => ({
     body: getSchema<IBodyProps>(yup.object().shape({
         name: yup.string().required().min(3).max(100),

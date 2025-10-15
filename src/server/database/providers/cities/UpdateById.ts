@@ -1,12 +1,12 @@
 import { ICity } from "../../models";
 import { ETableNames } from "../../ETableNames";
-import { Knex } from "../../index";
+import { KnexConection } from "../../index";
 
 export const updateById = async (id:number, city: Omit<ICity, 'id'>): Promise<void | Error> => {
 
     try { 
         console.log(`Trying to update the city with the id: ${id}.`)
-        const result = await Knex(ETableNames.city)
+        const result = await KnexConection(ETableNames.city)
         .update(city)
         .where('id', '=', id);
 
