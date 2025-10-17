@@ -8,7 +8,6 @@ import { userProvider } from "../../database/providers/user";
 
 
 interface IBodyProps extends Omit<IUser,'id'>{
-
 }
 
 
@@ -25,7 +24,6 @@ export const signUpValidation = validation((getSchema) => ({
 
 export const signUp = async (req:Request<{},{},IBodyProps>, res: Response) => {
 
-
     const result = await userProvider.create(req.body);
 
     if (result instanceof Error) {
@@ -39,9 +37,4 @@ export const signUp = async (req:Request<{},{},IBodyProps>, res: Response) => {
     })
 
 }
-
-
-
-
-
 
