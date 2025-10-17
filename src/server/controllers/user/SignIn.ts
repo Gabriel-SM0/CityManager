@@ -29,9 +29,9 @@ export const signUser = async (req: Request<{}, {}, IBodyProps>, res: Response) 
         })
     }
 
-    const passwordStatus = await verifyPassword(req.body.password, user.password);
+    const IsPasswordStatus = await verifyPassword(req.body.password, user.password);
 
-    if (!passwordStatus) {
+    if (!IsPasswordStatus) {
         return res.status(StatusCodes.UNAUTHORIZED).json({
             error: "Invalid Email or password"
         })
@@ -49,7 +49,7 @@ export const signUser = async (req: Request<{}, {}, IBodyProps>, res: Response) 
             })
 
         } else {
-            return res.status(StatusCodes.OK).json({acessToken}).send()
+            return res.status(StatusCodes.OK).json({ acessToken }).send()
         }
 
     }
