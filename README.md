@@ -1,8 +1,8 @@
 # 🧩 Node.js MVC Practice Project
 
-This project was developed as a personal exercise to practice **Node.js** fundamentals and backend architecture.  
-It follows the **MVC pattern**, including **validation middlewares**, **authentication**, and **automated testing** to simulate a real-world API structure.  
-Additionally, the project is **deployed on Google Cloud** and integrated with a **CI/CD pipeline** for automated deployment and testing.
+RESTful API built with Node.js following the MVC pattern, including authentication, validation middlewares, automated testing, and cloud deployment.
+
+This project demonstrates backend architecture best practices, security implementation, and CI/CD integration in a production-like environment.
 
 ---
 
