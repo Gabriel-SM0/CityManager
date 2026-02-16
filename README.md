@@ -1,6 +1,6 @@
 # 🧩 Node.js MVC Practice Project
 
-RESTful API built with Node.js following the MVC pattern, including authentication, validation middlewares, automated testing, and cloud deployment.
+RESTful API built with Node.js following the **MVC pattern**, including **authentication**, **validation middlewares**, **automated testing**, and **cloud deployment**.
 
 This project demonstrates backend architecture best practices, security implementation, and CI/CD integration in a production-like environment.
 
@@ -17,13 +17,6 @@ This project demonstrates backend architecture best practices, security implemen
 - **Jest** — unit and integration testing framework.  
 - **Google Cloud Integration** — cloud deployment and environment configuration.  
 - **CI/CD Pipeline** — automated build, test, and deployment process.
-
----
-
-## 🧠 Purpose
-
-This repository was created purely for **learning and improving backend development skills** with Node.js.  
-The main goal is to understand how to structure a scalable, testable, and cloud-integrated server-side application.
 
 ---
 
