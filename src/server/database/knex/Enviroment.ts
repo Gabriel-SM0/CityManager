@@ -34,7 +34,7 @@ export const test = {
     connection: ':memory:',
 };
 
-export const production = {
+export const production: Knex.Config = {
     client: 'pg',
     migrations: {
         directory: path.resolve(__dirname, '..', 'migrations')
@@ -43,18 +43,10 @@ export const production = {
         directory: path.resolve(__dirname, '..', 'seeds')
         
     },
-    pool: {
-        afterCreate: (connection: any, done: Function) => {
-            connection.run('PRAGMA foreign_keys = ON', done);
-        }
-    },
     connection: {
-        host: process.env.DATABASE_HOST,
-        user: process.env.DATABASE_USER,
-        database: process.env.DATABASE_NAME,
-        password: process.env.DATABASE_PASSWORD,
-        port: Number(process.env.DATABASE_PORT || 5432),
-        ssl: {rejectUnauthorized: false}
-        //ssl reject unauthorized false need to be false due to hiroku restrictions
-    },
+    connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    }
 };
