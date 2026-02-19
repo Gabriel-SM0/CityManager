@@ -2,16 +2,42 @@ import { Knex } from "knex";
 import { ETableNames } from "../ETableNames";
 
 export const seed = async (knex: Knex) => {
-    const [{ count }] = await knex(ETableNames.city).count<[{ count: number }]>('* as count');
 
-    if (!Number.isInteger(count) || Number(count) > 0) {
-        return;
+    // Verifica se já existem registros
+    const result = await knex(ETableNames.city).count<{ count: string }[]>('* as count');
+
+    const count = Number(result[0].count);
+
+    if (count > 0) {
+    return;
     }
 
-    const citiesToInsert = citiesFromRs[0].estados.flatMap(estado =>
-        estado.cidades.map(cidade => ({ name: cidade }))
-    );
+    // Array final que será enviado para o banco
+    const citiesToInsert: { name: string; state: string; country: string }[] = [];
 
+    // Pega o primeiro elemento do array base
+    const estados = citiesFromRs[0].estados;
+
+    // Percorre cada estado
+    for (const estado of estados) {
+
+        const siglaDoEstado = estado.sigla;
+        const listaDeCidades = estado.cidades;
+
+        // Percorre cada cidade dentro do estado
+        for (const cidade of listaDeCidades) {
+
+            const cityObject = {
+                name: cidade,
+                state: siglaDoEstado,
+                country: 'Brasil'
+            };
+
+            citiesToInsert.push(cityObject);
+        }
+    }
+
+    // Insere tudo no banco
     await knex(ETableNames.city).insert(citiesToInsert);
 };
 
