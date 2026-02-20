@@ -13,7 +13,7 @@ export const seed = async (knex: Knex) => {
     }
 
     // Array final que será enviado para o banco
-    const citiesToInsert: { name: string; state: string; country: string }[] = [];
+    const citiesToInsert: { name: string; country: string; population: number }[] = [];
 
     // Pega o primeiro elemento do array base
     const estados = citiesFromRs[0].estados;
@@ -21,17 +21,16 @@ export const seed = async (knex: Knex) => {
     // Percorre cada estado
     for (const estado of estados) {
 
-        const siglaDoEstado = estado.sigla;
         const listaDeCidades = estado.cidades;
 
         // Percorre cada cidade dentro do estado
         for (const cidade of listaDeCidades) {
 
-            const cityObject = {
+                const cityObject = {
                 name: cidade,
-                state: siglaDoEstado,
-                country: 'Brasil'
-            };
+                country: "Brasil",
+                population: 100 
+                };
 
             citiesToInsert.push(cityObject);
         }
