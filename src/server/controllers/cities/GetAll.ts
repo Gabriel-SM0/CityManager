@@ -27,37 +27,39 @@ export const getAllValidation = validation((getSchema) => ({
 
 
 
-export const getAll = async (req: Request<{},{},{},IQueryProps>, res: Response) => {
+export const getAll = async (req: Request<{}, {}, {}, IQueryProps>,res: Response) => {
 
+  const page = Number(req.query.page ?? 1);
+  const limit = Number(req.query.limit ?? 10);
+  const filter = req.query.filter ?? '';
+  const id = req.query.id !== undefined ? Number(req.query.id) : undefined;
 
-    const result = await citiesProvider.getAll(req.query.page || 1, req.query.limit || 7, req.query.filter || '', Number(req.query.id))
-    const count = await citiesProvider.count(req.query.filter || '')
+  if (isNaN(page) || isNaN(limit) || (id !== undefined && isNaN(id))) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      errors: { default: "Invalid query parameters" }
+    });
+  }
 
+  const result = await citiesProvider.getAll(page, limit, filter, id);
+  const count = await citiesProvider.count(filter);
 
-    if (result instanceof Error){
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-            errors:{
-                default: result.message
-            }
-        })
-    } else if (count instanceof Error) {
-                return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-            errors:{
-                default: count.message
-            }
+  if (result instanceof Error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      errors: { default: result.message }
+    });
+  }
 
-        })
-    }
+  if (count instanceof Error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      errors: { default: count.message }
+    });
+  }
 
-    res.setHeader("access-control-expose-headers", "X-Total-Count");
-    res.setHeader("X-Total-Count", count);
-    console.log(req.query);
+  res.setHeader("access-control-expose-headers", "X-Total-Count");
+  res.setHeader("X-Total-Count", count);
 
-    console.log("Get All Cities Controller");
-    console.log({query: req.query});
+  console.log("Get All Cities Controller");
+  console.log({query: req.query});
 
-    return res.status(StatusCodes.OK).json(result);
-
-
-}
-
+  return res.status(StatusCodes.OK).json(result);
+};
